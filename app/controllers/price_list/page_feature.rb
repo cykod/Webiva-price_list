@@ -1,30 +1,21 @@
 class PriceList::PageFeature < ParagraphFeature
 
   feature :price_list_page_view, :default_feature => <<-FEATURE
-    <cms:menu>
-     <h1><cms:name/></h1>
-     <cms:sections>
-       <cms:section>
-       <ul>
-         <li><cms:name/></li>
-         <li><ul>
-         <cms:items>
-           <cms:item>
-           <cms:display>
-           <li><cms:name/> - <cms:price/></li>
-           <cms:extra_prices>
-             <cms:extra_price>
-               <li><cms:price/> <cms:name/></li>
-             </cms:extra_price>
-           </cms:extra_prices>
-           </cms:display>
-           </cms:item>
-         </cms:items>
-         </ul></li>
-       </ul>
-       </cms:section>
-     </cms:sections>
-    </cms:menu>
+  <cms:menu>
+    <cms:sections>
+      <cms:section>
+      <h3><cms:name/></h3>
+      <dl>
+      <cms:items>
+        <cms:item>
+        <dt><cms:name/></dt>
+        <dd><cms:price/></dd>
+        </cms:item>
+      </cms:items>
+      </dl>
+      </cms:section>
+    </cms:sections>
+  </cms:menu>
   FEATURE
 
   def price_list_page_view_feature(data)
