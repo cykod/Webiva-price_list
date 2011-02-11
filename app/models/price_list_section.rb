@@ -12,6 +12,8 @@ class PriceListSection < DomainModel
 
   acts_as_list :column => :position, :scope => :price_list_menu_id
 
+  cached_content :update => [:price_list_menu]
+
   def child_sections; []; end
 
   def next_position

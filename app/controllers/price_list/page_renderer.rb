@@ -6,7 +6,14 @@ class PriceList::PageRenderer < ParagraphRenderer
 
   def view
     @options = paragraph_options :view
-    @price_list = @options.price_list_menu
-    render_paragraph :feature => :price_list_page_view
+
+    result = renderer_cache(['PriceListMenu', @options.price_list_menu_id]) do |cache|
+      @price_list = @options.price_list_menu
+      cache[:title] = @price_list.name
+      cache[:output] = price_list_page_view_feature
+    end
+
+    set_title result.title
+    render_paragraph :text => result.output
   end
 end

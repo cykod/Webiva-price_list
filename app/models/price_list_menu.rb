@@ -5,4 +5,6 @@ class PriceListMenu < DomainModel
   has_domain_file :document_id
   
   validates_presence_of :name
+  
+  cached_content
 end

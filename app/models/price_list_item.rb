@@ -16,6 +16,8 @@ class PriceListItem < DomainModel
 
   serialize :extra_prices
   
+  cached_content :update => [:price_list_menu, :price_list_section]
+
   def child_sections; []; end
 
   def next_position
