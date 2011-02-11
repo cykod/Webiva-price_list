@@ -10,12 +10,14 @@ class PriceList::PageFeature < ParagraphFeature
          <li><ul>
          <cms:items>
            <cms:item>
+           <cms:display>
            <li><cms:name/> - <cms:price/></li>
            <cms:extra_prices>
              <cms:extra_price>
                <li><cms:price/> <cms:name/></li>
              </cms:extra_price>
            </cms:extra_prices>
+           </cms:display>
            </cms:item>
          </cms:items>
          </ul></li>
@@ -51,6 +53,12 @@ class PriceList::PageFeature < ParagraphFeature
     
     context.loop_tag("#{base}:item") { |t| t.locals.section.price_list_items }
     self.price_list_item_tags context, data, "#{base}:item"
+    
+    context.expansion_tag("#{base}:display") do |t|
+      types = t.attr['types']
+      types = types ? types.split(',').map{ |type| type.strip.downcase } : []
+      types.empty? ? t.locals.section.section_type.blank? : types.include?(t.locals.section.section_type.strip.downcase)
+    end
   end
 
   def price_list_item_tags(context, data, base='item')
@@ -65,5 +73,11 @@ class PriceList::PageFeature < ParagraphFeature
     context.loop_tag("#{base}:extra_price") { |t| t.locals.item.extra_prices_models }
     context.h_tag("#{base}:extra_price:price") { |t| t.locals.extra_price.price }
     context.h_tag("#{base}:extra_price:name") { |t| t.locals.extra_price.name }
+
+    context.expansion_tag("#{base}:display") do |t|
+      types = t.attr['types']
+      types = types ? types.split(',').map{ |type| type.strip.downcase } : []
+      types.empty? ? t.locals.item.item_type.blank? : types.include?(t.locals.item.item_type.strip.downcase)
+    end
   end
 end
