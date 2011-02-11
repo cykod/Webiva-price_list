@@ -1,0 +1,5 @@
+<% admin_form_for @menu do |f| -%>
+  <%= f.text_field :name, :required => true %>
+  <%= f.filemanager_image :image_id %>
+  <%= f.submit @menu.id ? 'Update menu'.t : 'Create menu'.t %>
+<% end -%>

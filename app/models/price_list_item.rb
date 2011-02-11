@@ -1,6 +1,9 @@
 class PriceListItem < DomainModel
   belongs_to :price_list_section
   belongs_to :price_list_menu
+  has_domain_file :image_1_id
+  has_domain_file :image_2_id
+  has_domain_file :image_3_id
   
   validates_presence_of :name
   validates_presence_of :price_list_section_id
