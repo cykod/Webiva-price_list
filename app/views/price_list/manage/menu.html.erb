@@ -1,5 +1,10 @@
-<% admin_form_for @price_list, :as => :menu do |f| -%>
+<div class='admin_content'>
+
+<% admin_form_for :menu, @price_list do |f| -%>
   <%= f.text_field :name, :required => true %>
   <%= f.filemanager_image :image_id %>
-  <%= f.submit @price_list.id ? 'Update menu'.t : 'Create menu'.t %>
+  <%= f.spacer %> 
+  <%= f.cancel_submit_buttons 'Cancel','Submit' %> 
 <% end -%>
+
+</div>
