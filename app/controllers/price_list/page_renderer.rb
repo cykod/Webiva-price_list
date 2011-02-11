@@ -6,11 +6,7 @@ class PriceList::PageRenderer < ParagraphRenderer
 
   def view
     @options = paragraph_options :view
-
-    # Any instance variables will be sent in the data hash to the 
-    # price_list_page_view_feature automatically
-  
+    @price_list = @options.price_list_menu
     render_paragraph :feature => :price_list_page_view
   end
-
 end

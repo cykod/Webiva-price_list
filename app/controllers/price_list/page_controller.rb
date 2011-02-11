@@ -5,12 +5,18 @@ class PriceList::PageController < ParagraphController
   editor_for :view, :name => "View", :feature => :price_list_page_view
 
   class ViewOptions < HashModel
-    # Paragraph Options
-    # attributes :success_page_id => nil
+    attributes :price_list_menu_id => nil
 
     options_form(
-                 # fld(:success_page_id, :page_selector) # <attribute>, <form element>, <options>
+                 fld(:price_list_menu_id, :select, :options => :price_list_menu_options)
                  )
+    
+    def price_list_menu_options
+      PriceListMenu.select_options_with_nil
+    end
+    
+    def price_list_menu
+      @price_list_menu ||= PriceListMenu.find_by_id(self.price_list_menu_id)
+    end
   end
-
 end
