@@ -12,6 +12,8 @@ class PriceListItem < DomainModel
 
   attr_accessor :extra_prices_text
   
+  attr_protected :price_list_menu_id, :price_list_section_id
+
   serialize :extra_prices
   
   def child_sections; []; end

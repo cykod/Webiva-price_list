@@ -1,0 +1,29 @@
+<ul class='page_detail_buttons'>
+  <li class='icon'><a href='javascript:void(0);'  title='<%= vh 'Delete Section'.t%>' onclick='PriceListTree.deleteSection(<%= @section.id %>);'><%= image_tag(theme_src('icons/header_actions/delete_page.png')) %></a></li>
+</ul>  
+
+<h1 class="inpage" id="chapter_title"><%= @section.name %></h1>
+
+<br/>
+
+<% ajax_tabs ['Edit', 'Items'], 'Items' do |t| -%>
+
+<% t.tab do -%>
+<div align="right" style="padding:5px;" id="save_notice"></div>
+<div id='edit_scene_form' style="padding-right:5px;">
+  <%= render(:partial => 'edit_section_form') %>
+</div>
+<% end -%>
+
+<% t.tab do -%>
+  <% form_for :item, :html => {:onsubmit => 'PriceListEditor.addItem(); return false;', :id => 'add_item_form' } do |f| %>
+    <%= f.text_field :name %>
+    <input type='submit' value='<%= "Add Item" %>'/>
+  <% end -%>
+
+  <div id="items">
+  <%= render :partial => 'items' %>
+  </div>
+<% end -%>
+
+<% end -%>

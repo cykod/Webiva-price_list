@@ -1,0 +1,12 @@
+<% cms_form_for :section, @section, :html => {'j-action' => 'submitform', 'submitform' => "#{url_for :action => 'update_section', :path => @base_path + [@section.id]}"} do |f|  -%>
+  <%= f.text_field :name, :required => true %>
+  <%= f.submit_tag 'Save' %>
+<% end -%>
+
+<script>
+JSetup.setup();
+<% if @updated -%>
+PriceListTree.updateTitle(<%= @section.id %>, "<%= jh @section.name %>");
+$j('#save_notice').html("<%= DateTime.now.strftime("Saved  %A, %I:%M:%S%p") %>");
+<% end -%>
+</script>

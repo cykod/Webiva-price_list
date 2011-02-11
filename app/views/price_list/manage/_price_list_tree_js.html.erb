@@ -1,0 +1,34 @@
+<script>
+
+PriceListTree = {
+  sectionUrl: "<%= url_for :action => 'section', :path => @base_path %>",
+  updateTreeUrl: "<%= url_for :action => 'update_tree', :path => @base_path %>",
+  addToTreeUrl: "<%= url_for :action => 'add_to_tree', :path => @base_path %>",
+  deleteUrl: "<%= url_for :action => 'delete_section', :path => @base_path %>",
+
+  select: function(element_id,element) {
+    $j('#tree_content').show();
+    $j('#element_info').load(PriceListTree.sectionUrl + "/" + element_id);
+  },
+
+  drop: function(params) {
+    $j.post(PriceListTree.updateTreeUrl, params);
+  },
+
+  add: function(drag_id,drop_id,position) {
+    $j.post(PriceListTree.addToTreeUrl + "/" + drop_id, {act:drag_id, position:position});
+  },
+
+  updateTitle: function(section_id, title) {
+    $j('#section_' + section_id + ' .active_tree_leaf_content').html(title);
+    $j('#chapter_title').html(title);
+  },
+
+  deleteSection: function(section_id) {
+    if(confirm("Are you sure you want to permanently delete this section and all of its items?")) {
+      $j.post(PriceListTree.deleteUrl + "/" + section_id);
+    }
+  }
+};
+
+</script>

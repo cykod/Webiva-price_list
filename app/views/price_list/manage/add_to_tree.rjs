@@ -1,0 +1,9 @@
+
+page.replace_html :tree_content, :text => active_tree(:section, @sections, :partial => 'section_tree_node', :javascript => 'PriceListTree', :children => :child_sections, :no_handle => true)
+
+if @deleted
+  page.replace_html :element_info, :text => '<h2>Section deleted</h2>'
+elsif @new_section
+  @section = @new_section
+  page.replace_html :element_info, :partial => 'section'
+end

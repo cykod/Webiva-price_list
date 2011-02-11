@@ -1,0 +1,19 @@
+<div class="tree_container">
+  <div id='new_section' style="padding:5px 10px 0 0; float:right;">
+    <%= theme_image_tag('icons/tree/file.png', :align => 'absmiddle') %> Add New Section
+  </div>
+
+  <h2><%= 'Scection Structure'.t %></h2>
+
+  <div class="tree_container_body">
+    <div id='tree_content'>
+      <%= active_tree :section, @sections, :partial => 'section_tree_node', :javascript => 'PriceListTree', :children => :child_sections, :no_handle => true %>
+    </div>
+  </div>
+</div>
+
+<script>
+new Draggable('new_section', { ghosting: true, revert: true, scroll: window  });
+SortableTree.Node.prototype.canContainChildren = function() { return false; }
+ActiveTree.rebuildArrows();
+</script>

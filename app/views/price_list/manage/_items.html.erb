@@ -1,0 +1,17 @@
+<% cms_unstyled_form_for :section, @section, :html => {'j-action' => 'submitform', 'submitform' => "#{url_for :action => 'update_section', :path => @base_path + [@section.id]}"} do |f| %>
+  <div id='pub_items' style='padding:10px;'>
+  <% @section.price_list_items.each_with_index do |item,index| %>
+    <%= render :partial => 'edit_item_form', :locals => { :item => item, :item_index => index} %>
+  <% end -%>
+  </div>
+
+  <input type='submit' value='<%= jh "Save".t %>' />
+
+  <script>PriceListEditor.createItemSortables();</script>
+<% end -%>
+
+<script>
+PriceListEditor.itemIndex = <%= @section.price_list_items.size - 1 %>;
+PriceListEditor.itemId = <%= @section.id %>;
+JSetup.setup();
+</script>

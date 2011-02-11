@@ -1,1 +1,12 @@
+<%= render :partial => 'price_list_tree_js' %>
+<%= render :partial => 'price_list_editor_js' %>
 
+<div class='admin_content'>
+
+<%= render :partial => 'section_tree' %>
+
+<div class="tree_detail" id="element_info">
+  <%= render :partial => 'section' if @section %>
+</div>
+
+</div>

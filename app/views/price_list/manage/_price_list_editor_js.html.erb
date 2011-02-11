@@ -1,0 +1,57 @@
+<script>
+PriceListEditor = {
+  itemIndex: null,
+  sectionId: null,
+
+  // Sortable Functions
+  createItemSortables:function() {
+     Sortable.create('pub_items', 
+              { 
+                tag: 'div',      
+                constraint: 'vertical', 
+                handle: 'handle',       
+                dropOnEmpty:true,
+                onUpdate: PriceListEditor.updateSortables });
+  },
+  
+  updateSortables: function() {
+    idx = 1;
+    $$('.sortable_item').each( function(ele) { ele.value = idx; idx++; } );
+  },
+  
+  // Option Functions
+  closeOptions: function(item_id) {
+    $j('#options_' + item_id).hide();
+  },
+  
+  toggleOptions: function(item_id) {
+    $j('#options_' + item_id).toggle();
+  },
+
+  updateName: function(item_id,value) {
+    $j('#item_name_' + item_id).html(value.escapeHTML());
+  },
+  
+  // Items Functions
+  addItem: function() {
+    params = Form.serialize('add_item_form');
+    PriceListEditor.itemIndex+=1;
+    params += "&item_index=" + PriceListEditor.itemIndex;
+    new Ajax.Updater('pub_items',
+                     '<%= url_for :action => "new_item", :path => @base_path %>/' + PriceListEditor.sectionId,
+                     { parameters: params,
+                       insertion: Insertion.Bottom,
+                       evalScripts: true,
+                       onComplete: function(req) {
+                          PriceListEditor.createItemSortables();
+                       }
+                     });
+  },
+  
+  deleteItem: function(item_idx,item_id) {
+    if(confirm("<%= jh 'Remove this item?'.t %>")) {
+      $j('#elem_item_' + item_idx).remove();
+    }
+  }
+}
+</script>
