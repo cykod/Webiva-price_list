@@ -1,5 +1,11 @@
 <% cms_form_for :section, @section, :html => {'j-action' => 'submitform', 'submitform' => "#{url_for :action => 'update_section', :path => @base_path + [@section.id]}"} do |f|  -%>
   <%= f.text_field :name, :required => true %>
+  <%= f.text_area :description, :rows => 4 %>
+  <%= f.text_area :extra_description, :rows => 2 %>
+  <%= f.filemanager_image :image_1_id %>
+  <%= f.filemanager_image :image_2_id %>
+  <%= f.filemanager_image :image_3_id %>
+  <%= f.text_field :section_type, :description => 'used in feature to change display options' %>
   <%= f.submit_tag 'Save' %>
 <% end -%>
 

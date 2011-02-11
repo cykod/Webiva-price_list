@@ -12,6 +12,14 @@
     <input class="sortable_item" type='hidden' name='section[items][<%= item_index %>][position]' value='<%= item_index + 1 %>' />
     <%= f.hidden_field :id if item.id %>
     <%= f.text_field :name, :onchange => "PriceListEditor.updateName(#{item_index},this.value);", :onkeyup => "PriceListEditor.updateName(#{item_index},this.value);" %>
+    <%= f.text_field :price %>
+    <%= f.text_area :description, :rows => 4 %>
+    <%= f.filemanager_image :image_1_id %>
+    <%= f.filemanager_image :image_2_id %>
+    <%= f.filemanager_image :image_3_id %>
+    <%= f.text_area :extra_prices_list, :rows => 2, :label => 'Extra Prices', :description => '<price>::<name>, one per a line' %>
+    <%= f.text_area :extra_description, :rows => 2 %>
+    <%= f.text_field :item_type, :description => 'used in feature to change display options' %>
   <% end -%>
   </table>
 

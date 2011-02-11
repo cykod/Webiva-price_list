@@ -29,7 +29,7 @@ class PriceListItem < DomainModel
   end
   
   def extra_prices_models
-    @extra_prices_models ||= self.extra_prices.collect { |p| Price.new(p) }
+    @extra_prices_models ||= (self.extra_prices || []).collect { |p| Price.new(p) }
   end
   
   def extra_prices_list
