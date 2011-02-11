@@ -80,7 +80,8 @@ class PriceList::ManageController < ModuleController
   def update_section
     return render(:nothing => true) unless request.post? && params[:section]
     @updated = get_section.update_attributes params[:section]
-    render :partial => params[:section][:price_list_items].nil? ? 'edit_section_form' : 'items'
+    @section.reload
+    render :partial => params[:section][:items].nil? ? 'edit_section_form' : 'items'
   end
 
   def delete_section

@@ -32,7 +32,8 @@ class PriceListSection < DomainModel
 
   def items=(values)
     @new_items = values.collect do |idx, attrs|
-      item = self.price_list_items.to_a.find { |s| s.id == attrs[:id].to_i } if attrs[:id]
+      item_id = attrs.delete :id
+      item = self.price_list_items.to_a.find { |s| s.id == item_id.to_i } if item_id
       item ||= self.price_list_items.new
       item.attributes = attrs
       item
@@ -40,6 +41,9 @@ class PriceListSection < DomainModel
   end
   
   def after_save
-    self.price_list_items = @new_items if @new_items
+    if @new_items
+      self.price_list_items.each { |cs| cs.destroy unless @new_items.detect { |ns| cs.id == ns.id } }
+      @new_items.each { |ns| ns.save }
+    end
   end
 end
